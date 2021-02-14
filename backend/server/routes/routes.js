@@ -3,6 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
+//login y registro de usuarios
 router.post('/api/register', register)
 router.post('/api/login', login)
 

@@ -1,3 +1,4 @@
-export const secretKey = 'mySecretKey';
-
-export const expireToken = 43200
+export const configs = {
+    secretKey: 'mySecretKey',
+    expireToken: 43200
+}

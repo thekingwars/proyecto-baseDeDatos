@@ -1,7 +1,7 @@
 import database from '../db';
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import { secretKey, expireToken } from '../config/config'
+import { configs } from '../config/config'
 
 
 export const register = (req, res) => {
@@ -37,8 +37,8 @@ export const register = (req, res) => {
             console.log('Ha ocurrido un error: ' + error);
         }
         else{
-            let token = jwt.sign({id: results.insertId}, secretKey, {
-                expiresIn: expireToken
+            let token = jwt.sign({id: results.insertId}, configs.secretKey, {
+                expiresIn: configs.expireToken
             })
             return res.status(201).json({ok: 'true', token})
         }
@@ -56,10 +56,9 @@ export const login = (req, res) => {
             res.status(401).json({ok: 'false', err: 'El correo no existe'})
         }
         else{
-           
             if(bcrypt.compareSync(contraseña, results[0].contraseña)){
-                let token = jwt.sign({user: results[0].id}, secretKey, {
-                    expiresIn: expireToken
+                let token = jwt.sign({user: results[0].id}, configs.secretKey, {
+                    expiresIn: configs.expireToken
                 })
 
                res.status(201).json({ok: 'true', token})
