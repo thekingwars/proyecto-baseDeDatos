@@ -1,5 +1,6 @@
 import { register, login } from '../controllers/users.controllers'
 import express from 'express';
+import { notToken } from '../middlewares/auth.middlewares'
 
 const router = express.Router();
 
