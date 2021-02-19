@@ -2,7 +2,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import routes from './routes/routes'
-
+import path from 'path'
 
 //inicializaciones
 const app = express()
@@ -14,6 +14,9 @@ app.set('port', 3000 || process.env.PORT)
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
+
+//statics file
+app.use(express.static(path.join(__dirname, '../public')))
 
 //routers
 app.use(routes)

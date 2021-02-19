@@ -2,39 +2,52 @@ import database from '../db';
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { configs } from '../config/config'
+import { OAuth2Client } from 'google-auth-library'
 
+const client = new OAuth2Client(configs.clientId);
+
+
+async function verify(token) {
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: configs.clientId,  // Specify the CLIENT_ID of the app that accesses the backend
+        // Or, if multiple clients access the backend:
+        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+    });
+    const payload = ticket.getPayload();
+
+    console.log(payload)
+  }
 
 export const register = (req, res) => {
 
-    const { nombre, apellido, correo, contraseña } = req.body
+    const { nombre, apellido, correo, contrasena } = req.body
     const salt = bcrypt.genSaltSync(10)
-    let password = bcrypt.hashSync(contraseña, salt)
+    let password = bcrypt.hashSync(contrasena, salt)
     let sql = `INSERT INTO users SET ?`
     let correoExist = `SELECT * FROM users WHERE correo = ?`
     let data = {
         nombre,
         apellido,
         correo,
-        contraseña: password
+        contrasena: password
     }
-    
-    if(!nombre || !apellido || !correo || !contraseña){
-        res.status(400).json({ok: 'false', err: 'Campos requeridos'});
-    }
-
-    if(contraseña.length < 6){
-        res.status(401).json({ok: 'false', err: 'La contraseña minimo debe tener 6 caracteres'})
-    }
-
-    database.query(correoExist, correo, function(err, results){
-        if(results[0]){
-           res.status(401).json({ok: 'false', err: 'correo existente'});
-        }
-    })
 
     database.query(sql, data, function(error, results){
         if(error){
-            console.log('Ha ocurrido un error: ' + error);
+            if(!nombre || !apellido || !correo || !contrasena){
+                return res.status(400).json({ok: 'false', err: 'Campos requeridos'});
+            }
+
+            if(contrasena.length < 6){
+                return res.status(401).json({ok: 'false', err: 'La contraseña minimo debe tener 6 caracteres'})
+            }
+
+            database.query(correoExist, correo, function(err, results){
+                if(results[0].correo === correo){
+                   res.status(401).json({ok: 'false', err: 'correo existente'});
+                }
+            })
         }
         else{
             let token = jwt.sign({id: results.insertId}, configs.secretKey, {
@@ -47,16 +60,16 @@ export const register = (req, res) => {
 
 
 export const login = (req, res) => {
-    const { correo, contraseña } = req.body
+    const { correo, contrasena } = req.body
 
     let sql = `SELECT * FROM users WHERE correo = ?`
 
     database.query(sql, correo, (err, results) => {
-        if(err){
-            res.status(401).json({ok: 'false', err: 'El correo no existe'})
-        }
+        if(results[0].correo === correo){
+            res.status(401).json({ok: 'false', err: 'correo existente'});
+         }
         else{
-            if(bcrypt.compareSync(contraseña, results[0].contraseña)){
+            if(bcrypt.compareSync(contrasena, results[0].contrasena)){
                 let token = jwt.sign({user: results[0].id}, configs.secretKey, {
                     expiresIn: configs.expireToken
                 })
@@ -69,4 +82,12 @@ export const login = (req, res) => {
         }
     })
 
+}
+
+export const google = (req, res) => {
+    let token = req.body.idtoken
+
+    verify(token)
+
+    res.status(200).json({token})
 }
