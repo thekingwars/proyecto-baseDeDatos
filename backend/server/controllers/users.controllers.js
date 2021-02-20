@@ -16,7 +16,13 @@ async function verify(token) {
   });
   const payload = ticket.getPayload();
 
-  console.log(payload)
+  return {
+    nombre: payload.name.split(' ')[0],
+    apellido: payload.name.split(' ')[1],
+    correo: payload.email,
+    google: true,
+  }
+
 }
 
 export const register = (req, res) => {
@@ -68,7 +74,6 @@ export const login = (req, res) => {
   let sql = `SELECT * FROM users WHERE correo = ?`
 
   database.query(sql, correo, (err, results) => {
-    console.log(results)
     if (results.length === 0) {
       return res.status(400).json({ok: 'false', err: 'correo inexistente, por favor registrese'});
     } else {
@@ -84,10 +89,54 @@ export const login = (req, res) => {
   })
 }
 
-export const google = (req, res) => {
+export const google = async (req, res) => {
+
+  let sql = 'SELECT * FROM users WHERE correo = ?'
   let token = req.body.idtoken
+  let googleUser = await verify(token)
 
-  verify(token)
+  database.query(sql, googleUser.correo, (err, results) => {
+    if(err){
+      return res.status(500).json({ok: false, err: 'Ha ocurrido un error al iniciar sesion por favor intentelo de nuevo'});
+    }
+    else{
+      if(results.length > 0){
+        if(results[0].google == false){
+          return res.status(400).json({ok: false, err: 'Usted ya esta autenticado, con otra cuenta'})
+        }
+        else{
+          let token = jwt.sign({user: results[0].id}, configs.secretKey, {
+            expiresIn: configs.expireToken
+          })
 
-  res.status(200).json({token})
+          return res.status(200).json({ok: true, usuario: results[0], token})
+        }
+      }
+      else{
+        //si el usuario no existe en nuestra base de datos
+
+        let sql = `INSERT INTO users SET ?`
+        let usuario = {
+          nombre: googleUser.nombre,
+          apellido: googleUser.apellido,
+          correo: googleUser.correo,
+          password: ':)',
+          google: googleUser.google
+        }
+
+        database.query(sql, usuario, (err, results) => {
+          if(err){
+            return res.status(500).json({ok: false, err: 'Ha ocurrido un error al registrarse por favor intentelo de nuevo'});
+          }
+          else{
+            let token = jwt.sign({id: results.insertId}, configs.secretKey, {
+              expiresIn: configs.expireToken
+            })
+            return res.status(201).json({ok: true, user: results[0], token})
+          }
+        })
+
+      }
+    }
+  })
 }
