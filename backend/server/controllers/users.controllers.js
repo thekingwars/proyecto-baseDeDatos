@@ -1,6 +1,7 @@
 import database from '../db';
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import { transporter } from '../config/mailer'
 import {configs} from '../config/config'
 import {OAuth2Client} from 'google-auth-library'
 
@@ -74,6 +75,10 @@ export const login = (req, res) => {
   let sql = `SELECT * FROM users WHERE correo = ?`
 
   database.query(sql, correo, (err, results) => {
+
+    if(err){
+      return res.status(500).json({ok: false, err: 'Ha ocurrido un error inesperado, por favor vuelva a intentarlo'})
+    }
     if (results.length === 0) {
       return res.status(400).json({ok: 'false', err: 'correo inexistente, por favor registrese'});
     } else {
@@ -120,13 +125,13 @@ export const google = async (req, res) => {
           nombre: googleUser.nombre,
           apellido: googleUser.apellido,
           correo: googleUser.correo,
-          password: ':)',
+          contrasena: 'Usuario registrado con google',
           google: googleUser.google
         }
 
         database.query(sql, usuario, (err, results) => {
           if(err){
-            return res.status(500).json({ok: false, err: 'Ha ocurrido un error al registrarse por favor intentelo de nuevo'});
+            return res.status(500).json({ok: false, err});
           }
           else{
             let token = jwt.sign({id: results.insertId}, configs.secretKey, {
@@ -139,4 +144,97 @@ export const google = async (req, res) => {
       }
     }
   })
+}
+
+
+export const verifyEmail =  (req, res) => {
+  const { correo } = req.body
+  let sql = 'SELECT * FROM users WHERE correo = ?'
+
+
+  if(!correo){
+    return res.status(400).json({ok: 'false', err: 'El correo es necesario'})
+  }
+
+  database.query(sql, correo, async (err, results) => {
+    if(err){
+      return res.status(500).json({ok: 'false', err: 'Ha ocurrido un error inesperado, por favor intentelo de nuevo: ' + err})
+    }
+    else{
+      if(results.length > 0){
+        let token = jwt.sign({user: results[0].id}, configs.secretKey, {
+          expiresIn: '5min'
+        })
+
+        let direcction = `localhost:4200/new-password/${token}`
+
+          // send mail with defined transport object
+        await transporter.sendMail({
+          from: '"Fred Foo 👻" <carlosguerra2001.2@gmail.com>', // sender address
+          to: results[0].correo, // list of receivers
+          subject: "Hello ✔", // Subject line
+          html: `
+          <b>Hello world?</b> 
+          
+          <br> 
+          
+          <a href="${direcction}" target="_blank">${direcction}</a>
+
+          `, // html body
+        });
+
+        return res.status(201).json({ok: true, token, msg: 'Se ha enviado un correo'})
+      }
+      else{
+        return res.status(400).json({ok: 'false', err: 'El correo no existe'})
+      }
+    }
+  })
+
+}
+
+
+export const resetPassword = (req, res) => {
+  const { token } = req.params
+  const { newPassword, repeatPassword } = req.body
+  const salt = bcrypt.genSaltSync(10)
+  console.log(token)
+
+  let newPasswordEncrypt = bcrypt.hashSync(newPassword, salt)
+
+  let data = {
+    contrasena: newPasswordEncrypt
+  }
+
+  let sql = 'UPDATE users set ? WHERE id = ?'
+
+  if(!repeatPassword || !newPassword){
+    return res.status(400).json({ok: false, err: 'Campos requeridos'});
+  }
+
+  if(repeatPassword !== newPassword){
+    return res.status(400).json({ok: false, err: 'Las contraseñas no coinciden'});
+  }
+
+  if(!token){
+    res.status(404).json({err: 'Debe verificar su email y leer su correo'})
+  }
+  else{
+    jwt.verify(token, configs.secretKey, (err, decode) => {
+      if(err){
+        res.status(500).json({err: 'Token invalido'})
+      }
+      else{
+        database.query(sql, [data, decode.user], (err, results) => {
+          if(err){
+            return res.status(500).json({ok: false, err: 'Ha ocurrido un error inesperado', err})
+          }
+          else{
+            return res.status(201).json({ok: true, msg: 'Contraseña actualizada con exito'})
+          } 
+        })
+      }
+    })
+  }
+
 }
