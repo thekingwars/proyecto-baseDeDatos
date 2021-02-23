@@ -82,13 +82,18 @@ export const login = (req, res) => {
     if (results.length === 0) {
       return res.status(400).json({ok: 'false', err: 'correo inexistente, por favor registrese'});
     } else {
-      if (bcrypt.compareSync(contrasena, results[0].contrasena)) {
-        let token = jwt.sign({user: results[0].id}, configs.secretKey, {
-          expiresIn: configs.expireToken
-        })
-        return res.status(201).json({ok: true, token})
-      } else {
-        return res.status(401).json({ok: 'false', err: 'correo o contraseña incorrecta'})
+      if(results[0].google == true){
+        return res.status(400).json({ok: false, err: 'Usted ya esta autenticado con otra cuenta'})
+      }
+      else{
+        if (bcrypt.compareSync(contrasena, results[0].contrasena)) {
+          let token = jwt.sign({user: results[0].id}, configs.secretKey, {
+            expiresIn: configs.expireToken
+          })
+          return res.status(201).json({ok: true, token})
+        } else {
+          return res.status(401).json({ok: 'false', err: 'correo o contraseña incorrecta'})
+        }
       }
     }
   })

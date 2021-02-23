@@ -13,5 +13,5 @@ export const transporter = nodemailer.createTransport({
 });
 
 transporter.verify().then( () => {
-    console.log('Email enviado')
+    console.log('Nodemailer funcionando correctamente')
 })
