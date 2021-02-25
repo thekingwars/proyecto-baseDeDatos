@@ -2,8 +2,8 @@ import database from '../db';
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { transporter } from '../config/mailer'
-import {configs} from '../config/config'
-import {OAuth2Client} from 'google-auth-library'
+import { configs } from '../config/config'
+import { OAuth2Client } from 'google-auth-library'
 
 const client = new OAuth2Client(configs.clientId);
 
@@ -104,6 +104,7 @@ export const google = async (req, res) => {
   let sql = 'SELECT * FROM users WHERE correo = ?'
   let token = req.body.idtoken
   let googleUser = await verify(token)
+
 
   database.query(sql, googleUser.correo, (err, results) => {
     if(err){
