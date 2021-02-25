@@ -1,0 +1,40 @@
+<div class="body">
+    <form (ngSubmit)="onSubmit()" class="Formulario" [formGroup]="formRegister">
+        <h1>Registrate</h1>
+        <div class="Contenedor">
+    
+            <div class="input-Contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Nombre" formControlName="nombre">
+            </div>
+            <p class="text-danger" *ngIf="isValidField('nombre')">{{getErrorMessage('nombre')}}</p>
+    
+            <div class="input-Contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Apellido" formControlName="apellido">
+            </div>
+            <p class="text-danger" *ngIf="isValidField('apellido')">{{getErrorMessage('apellido')}}</p>
+
+            <div class="input-Contenedor">
+                <i class="fas fa-key icon"></i>
+                <input type="text" placeholder="Contraseña" formControlName="contrasena">
+            </div>
+            <p class="text-danger" *ngIf="isValidField('contrasena')">{{getErrorMessage('contrasena')}}</p>
+
+            <div class="input-Contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" placeholder="Correo Electronico" formControlName="correo">
+            </div>
+            <p class="text-danger" *ngIf="isValidField('correo')">{{getErrorMessage('correo')}}</p>
+
+            <input type="submit" value="Registrate" class="button" [disabled]="this.formRegister.invalid">
+            <hr>
+            <button type="button" class="btn btn-danger btn-lgs" (click)="signInWithGoogle()">
+                <i class="fab fa-google"></i> Registrate con google
+            </button>
+            <hr>
+            <p>Al registrarte, aceptas nuestras Condiciones de uso y Politícas de privacidad.</p>
+            <p>¿Ya tienes una cuenta? <a class="link" routerLink="/login">Iniciar Sesión</a></p>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,28 @@
+<div class="body">
+    <form (ngSubmit)="onSubmit()" class="Formulario" [formGroup]="formLogin">
+        <h1>Login</h1>
+        <div class="Contenedor">
+    
+            <div class="input-Contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" placeholder="Correo Electronico" formControlName="correo">
+            </div>
+            <p class="text-danger" *ngIf="isValidField('correo')">{{getErrorMessage('correo')}}</p>
+
+            <div class="input-Contenedor">
+                <i class="fas fa-key icon"></i>
+                <input type="password" placeholder="Contraseña" formControlName="contrasena">
+            </div>
+            <p class="text-danger" *ngIf="isValidField('contrasena')">{{getErrorMessage('contrasena')}}</p>
+
+            <input type="submit" value="Login" class="button" [disabled]="this.formLogin.invalid">
+
+            <hr>
+                <a routerLink="/verifyEmail">¿Has olvidado tu contraseña?</a>
+            <hr>
+
+            <p>Al registrarte, aceptas nuestras Condiciones de uso y Politícas de privacidad.</p>
+            <p>¿No tienes una cuenta? <a class="link" routerLink="/register">Registrate</a></p>
+        </div>
+    </form>
+</div>
