@@ -1,0 +1,43 @@
+<div class="fixed">
+    <nav class="grid__two grid__two--bg__ligth" >
+        <div class="grid__one__flex--1">
+           <img class="thumbnail" width="50%" src="../../../assets/img/Logo.png" alt="Logo liveSys">
+        </div>
+        <div class="grid__one__flex--2 bg__succes">
+            <div class="grid__one__links">
+                <a routerLink="" class="border__a a__navbar">Botones</a>
+                <a href="" class="border__a a__navbar">Botones</a>
+                <a href="" class="border__a a__navbar">Botones</a>
+                <a href="" class="border__a a__navbar">Botones</a>
+                <a href="" class=" btn btn__primary" style="margin-left: 20px; margin-top: -5px;">Botones</a>
+            </div>
+        </div>
+    
+        <div class="burguer" (click)="onClick()">
+           <button class="btn" #button_active>
+                <i class="fas fa-bars"></i>
+           </button>
+        </div>
+    </nav>
+    
+</div>
+<main class="grid__row--two" style="margin-top: 100px;" #contenedor>
+    <div class="flex__responsive">
+        <div class="contenedor__link"(click)="removeClass()">
+            <a routerLink="" class="nav-link a__navbar">Inicio</a>
+        </div>
+        <div class="contenedor__link" (click)="removeClass()">
+            <a href="" class="nav-link a__navbar">Registro</a>
+        </div>
+        <div class="contenedor__link" (click)="removeClass()">
+            <a href="" class="nav-link a__navbar">Login</a>
+        </div>
+        <div class="contenedor__link" (click)="removeClass()">
+            <a href="" class="nav-link a__navbar">Botones</a>
+        </div>
+        <div class="contenedor__link" (click)="removeClass()">
+            <a href="" class="nav-link a__navbar">Botones</a>
+        </div>
+    </div>
+</main>
+

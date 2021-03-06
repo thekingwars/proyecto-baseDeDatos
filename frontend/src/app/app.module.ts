@@ -12,6 +12,9 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { VerifyEmailComponent } from './views/users/verify-email/verify-email.component';
 import { ResetPasswordComponent } from './views/users/reset-password/reset-password.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { OnePageComponent } from './views/users/one-page/one-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { ResetPasswordComponent } from './views/users/reset-password/reset-passw
     LoginUsersComponent,
     RegisterUsersComponent,
     VerifyEmailComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    LoaderComponent,
+    NavbarComponent,
+    OnePageComponent
   ],
   imports: [
     BrowserModule,

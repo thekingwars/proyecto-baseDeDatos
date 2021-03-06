@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { usersModel } from '../models/user.model'
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -46,13 +46,13 @@ export class AuthService {
     )
   }
 
-  registerUserGoogle(idtoken){
-
-    const headers = new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded');
-
-
-    return this.http.post(`${this.api}/login/google`, idtoken, {headers})
+  registerUserGoogle(idToken){
+    return this.http.post(`${this.api}/login/google`, {idToken: idToken}).pipe(
+      map(resp => {
+        this.setToken(resp['token'])
+        return resp
+      })
+    )
   }
 
   verifyEmail(correo: string){

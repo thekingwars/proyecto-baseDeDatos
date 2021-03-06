@@ -5,7 +5,6 @@ import { SocialAuthService } from 'angularx-social-login';
 import { GoogleLoginProvider } from "angularx-social-login";
 
 import { AuthService } from 'src/app/services/auth.service';
-import { environment } from 'src/environments/environment';
 import swal from 'sweetalert2'
 
 @Component({
@@ -39,21 +38,15 @@ export class RegisterUsersComponent implements OnInit {
 
   getUser(){
     this.googleService.authState.subscribe((user) => {
-      this.user = user.idToken
+      let idToken = user.idToken
 
       this.loggedIn = (user != null)
 
-/*       function idtoken(idtoken){
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', `${environment.apiDev}/login/google`);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function() {
-        console.log('Signed in as: ' + xhr.responseText);
-        };
-
-        xhr.send('idtoken=' + user.idToken);
-      } */
+      this.auth.registerUserGoogle(idToken).subscribe(res => {
+        console.log(res)
+      }, err => {
+        swal.fire('Ha ocurrido un error', err['error']['err'], 'error')
+      })
     })
   }
 
@@ -93,13 +86,6 @@ export class RegisterUsersComponent implements OnInit {
       swal.fire('Se ha registrado con éxito', '', 'success')
     }, err => {
       swal.fire('Ha ocurrido un error', err['error']['err'], 'error')
-    })
-  }
-
-
-  google(){
-    this.auth.registerUserGoogle(this.user).subscribe(res => {
-      console.log('ah')
     })
   }
 

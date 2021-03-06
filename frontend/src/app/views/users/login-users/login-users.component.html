@@ -18,10 +18,12 @@
             <input type="submit" value="Login" class="button" [disabled]="this.formLogin.invalid">
 
             <hr>
-                <a routerLink="/verifyEmail">¿Has olvidado tu contraseña?</a>
+                <button type="button" class="btn btn-danger btn-lgs" (click)="signInWithGoogle()">
+                    <i class="fab fa-google"></i> Iniciar Sesión con google
+                </button>
             <hr>
 
-            <p>Al registrarte, aceptas nuestras Condiciones de uso y Politícas de privacidad.</p>
+            <p><a routerLink="/verifyEmail">¿Has olvidado tu contraseña?</a></p>
             <p>¿No tienes una cuenta? <a class="link" routerLink="/register">Registrate</a></p>
         </div>
     </form>

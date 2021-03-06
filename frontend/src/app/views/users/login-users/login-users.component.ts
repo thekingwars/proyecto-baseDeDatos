@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { usersModel } from 'src/app/models/user.model';
+import { SocialAuthService } from 'angularx-social-login';
+import { GoogleLoginProvider } from "angularx-social-login";
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 
@@ -12,11 +13,14 @@ import Swal from 'sweetalert2';
 export class LoginUsersComponent implements OnInit {
 
   formLogin: FormGroup
+  loggedIn: boolean;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private googleService: SocialAuthService) { }
 
   ngOnInit(): void {
     this.fbLogin()
+
+    this.getUser()
   }
 
   getErrorMessage(field: string) {
@@ -45,6 +49,26 @@ export class LoginUsersComponent implements OnInit {
     this.formLogin = this.fb.group({
       correo: new FormControl('', [Validators.required]),
       contrasena: new FormControl('', [Validators.required, Validators.minLength(6)])
+    })
+  }
+
+  signInWithGoogle(): void {
+    this.googleService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.googleService.signOut();
+  }
+
+  getUser(){
+    this.googleService.authState.subscribe((user) => {
+      let idToken = user.idToken
+
+      this.loggedIn = (user != null)
+
+      this.authService.registerUserGoogle(idToken).subscribe(res => {
+        console.log(res)
+      })
     })
   }
 
