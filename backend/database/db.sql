@@ -14,6 +14,19 @@ CREATE TABLE IF NOT EXISTS `users`
     `update_at`  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE `contact`
+(
+    `id_contact` BIGINT        NOT NULL AUTO_INCREMENT,
+    `nombre` VARCHAR(50)       NOT NULL,
+    `apellido` VARCHAR(50)     NOT NULL,
+    `correo` VARCHAR(120)      NOT NULL,
+    `telefono` INT,
+    `empresa` VARCHAR(50),
+    `descripcion` VARCHAR(120) NOT NULL
+
+    primary key(id)
+);
+
 CREATE TABLE IF NOT EXISTS `appointment`
 (
     `id_appointment` BIGINT      NOT NULL PRIMARY KEY AUTO_INCREMENT,
