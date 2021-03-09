@@ -12,3 +12,15 @@ CREATE TABLE users(
 
     primary key(id)
 );
+
+CREATE TABLE contact(
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    correo VARCHAR(120) NOT NULL,
+    telefono INT,
+    empresa VARCHAR(50),
+    descripcion VARCHAR(120) NOT NULL
+
+    primary key(id)
+);

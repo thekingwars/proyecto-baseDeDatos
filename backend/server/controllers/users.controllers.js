@@ -83,7 +83,7 @@ export const login = (req, res) => {
       return res.status(400).json({ok: 'false', err: 'correo inexistente, por favor registrese'});
     } else {
       if(results[0].google == true){
-        return res.status(400).json({ok: false, err: 'Usted ya esta autenticado con otra cuenta'})
+        return res.status(401).json({ok: false, err: 'Usted ya esta autenticado con otra cuenta'})
       }
       else{
         if (bcrypt.compareSync(contrasena, results[0].contrasena)) {
@@ -102,7 +102,8 @@ export const login = (req, res) => {
 export const google = async (req, res) => {
 
   let sql = 'SELECT * FROM users WHERE correo = ?'
-  let token = req.body.idtoken
+  let token = req.body.idToken
+
   let googleUser = await verify(token)
 
 
@@ -113,7 +114,7 @@ export const google = async (req, res) => {
     else{
       if(results.length > 0){
         if(results[0].google == false){
-          return res.status(400).json({ok: false, err: 'Usted ya esta autenticado, con otra cuenta'})
+          return res.status(401).json({ok: false, err: 'Usted ya esta autenticado, con otra cuenta'})
         }
         else{
           let token = jwt.sign({user: results[0].id}, configs.secretKey, {
@@ -228,7 +229,7 @@ export const resetPassword = (req, res) => {
   else{
     jwt.verify(token, configs.secretKey, (err, decode) => {
       if(err){
-        res.status(500).json({err: 'Token invalido'})
+        res.status(500).json({err: 'Token invalido o expirado'})
       }
       else{
         database.query(sql, [data, decode.user], (err, results) => {
