@@ -1,18 +1,37 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements AfterViewInit {
   @ViewChild('button_active', {static: true}) menu_burguer: ElementRef
   @ViewChild('contenedor', {static: true}) contenedor: ElementRef
+  @ViewChild('navbar', {static: true}) navbar: ElementRef;
 
-  constructor(private renderer2: Renderer2) { }
+  scroll: any;
+  elemento;
 
-  ngOnInit(): void {
-    console.log(this.contenedor.nativeElement.classList)
+  constructor(private renderer2: Renderer2) { 
+  }
+
+  ngAfterViewInit(){
+    this.scroll = fromEvent(document, 'scroll')
+    this.navbarScroll()
+  }
+
+  navbarScroll(){
+    this.scroll.subscribe(res => {
+      const scrollY = res.target.documentElement.scrollTop
+      if(scrollY >= 700){
+          this.renderer2.setStyle(this.navbar.nativeElement, 'opacity', '.8')
+      }
+      else{
+        this.renderer2.setStyle(this.navbar.nativeElement, 'opacity', '1')
+      }
+    })
   }
 
   onClick(){

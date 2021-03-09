@@ -83,10 +83,8 @@
         margin: 10px 10px;
         font-size: 18px;
     }
-}
 
-@media(max-width: 768px){
-    .fixed{
+        .fixed{
         z-index: 999;
         position: fixed;
         width: 100%;
@@ -180,14 +178,5 @@
         grid-template-rows: 100px;
     }
 }
-
-
-/*Se puede mejorar*/
-/* .grid__one__flex--2 a:hover{
-    text-align: center;
-    padding-bottom: 3px;
-    border-right: none;
-    border-bottom: 2px solid rgba(26, 28, 38, 1)
-} */
 
 

@@ -1,4 +1,12 @@
-.bg__image{
+[id] {
+    scroll-margin-top: 18ex;
+}
+
+p {
+    text-align: justify;
+}
+
+.bg__image {
     width: 100%;
     height: 100vh;
     background-image: url('../../../../assets/img/FondoBanner.jpg');
@@ -7,7 +15,7 @@
     position: relative;
 }
 
-.bg__color{
+.bg__color {
     z-index: 1;
     position: absolute;
     width: 100%;
@@ -15,7 +23,7 @@
     background-color: rgba(26, 28, 38, 0.5);
 }
 
-.bg__color::after{
+.bg__color::after {
     content: '';
     position: absolute;
     left: 0;
@@ -27,12 +35,11 @@
     z-index: -1;
 }
 
-.contenido{
+.contenido {
     z-index: 2;
     color: white;
     width: 100%;
     height: 100%;
-
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -41,80 +48,84 @@
     margin: 20px 0;
 }
 
-.contenido__title{
+.contenido__title {
     text-align: center;
     color: var(--color__warning);
     font-weight: bold;
     text-transform: uppercase;
 }
 
-.contenido__subtitle{
+.contenido__subtitle {
     text-align: center;
     text-transform: uppercase;
 }
 
-.contenido__text{
+.contenido__text {
     width: 40%;
     position: relative;
     text-align: center;
 }
 
-.contenido__text::before, .contenido__text::after{
+.contenido__text::before,
+.contenido__text::after {
     content: '';
     position: absolute;
     top: 10px;
     width: 300px;
     height: 4px;
     border-radius: 10px;
-
     background-color: var(--color__ligth);
 }
 
-.contenido__text::after{
+.contenido__text::after {
     right: -320px;
 }
 
-.contenido__text::before{
+.contenido__text::before {
     left: -320px;
 }
 
+
 /*Segunda seccion*/
 
-.second__section{
+.second__section {
     background-color: var(--color__ligth);
     width: 100%;
     height: auto;
 }
 
-.section__title h1{
+.section__title h1 {
     color: var(--color__success);
 }
 
-.section__text-bold{
+.section__text-bold {
     font-weight: bold;
     font-style: italic;
 }
 
-.second__section-image{
+.second__section-image {
     width: 100%;
     height: 100%;
     position: relative;
+    margin: 0 auto;
 }
 
-.second__section-image img{
+.second__section-image img {
     position: absolute;
-    left: 20%;
+    right: 0;
     bottom: -50%;
     z-index: 2;
 }
 
+
 /*third__section*/
 
-.third__section{
+.third__section {
+    width: 100%;
     height: 100vh;
 }
 
-.third__section-bg{
+.third__section-bg {
     width: 100%;
     height: 100%;
     background-image: url(../../../../assets/img/textura.png);
@@ -123,7 +134,7 @@
     position: relative;
 }
 
-.third__secction-bgColor{
+.third__secction-bgColor {
     z-index: 1;
     position: absolute;
     width: 100%;
@@ -131,18 +142,18 @@
     background-color: rgba(26, 28, 38, .9);
 }
 
-.third__section .row .col-md-3 h3{
+.third__section .row .col-md-3 h3 {
     color: white;
     margin-top: 50px;
 }
 
-.third__section .row .col-md-3 i{
+.third__section .row .col-md-3 i {
     color: white;
     font-size: 30px;
     margin: 5px 10px 0 0;
 }
 
-.flex{
+.flex {
     width: 100%;
     height: 100%;
     display: flex;
@@ -150,15 +161,14 @@
     justify-content: center;
 }
 
-.third__section__title h1{
+.third__section__title h1 {
     color: var(--color__warning);
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-
-.third__section__text{
+.third__section__text {
     color: white;
     text-align: justify;
     width: 80%;
@@ -166,14 +176,157 @@
 }
 
 
-@media(max-width: 1024px){
-    .contenido__text::before, .contenido__text::after{
+/*Cuarta seccion*/
+
+.four__section {
+    width: 100%;
+    background-color: var(--color__success);
+    padding: 50px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.four__section-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.four__section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 500px;
+    background-color: var(--color__primary);
+    clip-path: polygon(100% 83%, 0% 100%, 100% 100%);
+    z-index: -1;
+}
+
+.five__secction {
+    padding: 50px 0;
+    position: relative;
+    background-color: rgba(26, 28, 38, 1);
+    z-index: 1;
+}
+
+.image-svg {
+    opacity: .3;
+    position: absolute;
+    top: -10%;
+    left: 10%;
+    z-index: 1;
+}
+
+.ml-negativo {
+    margin-left: -350px;
+}
+
+.mt-porcentual {
+    margin-top: 10%;
+}
+
+.card-diferent {
+    width: 100%;
+    height: 400px;
+}
+
+.mt-200 {
+    margin-top: 200px;
+}
+
+@media(max-width: 1024px) {
+    .contenido__text::before,
+    .contenido__text::after {
         display: none;
+    }
+    .second__section-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .section__title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .second__section-image img {
+        position: static;
+    }
+    .five__secction {
+        display: block;
+    }
+    .flex {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    .third__section {
+        height: 50vh;
+    }
+    .third__section__text {
+        width: 100%;
+    }
+    .flex .row {
+        margin-top: 30px;
+    }
+    .mt-porcentual {
+        margin: 0;
+    }
+    .mt-porcentual h1 {
+        text-align: center;
+    }
+    .mt-porcentual p {
+        width: 50%;
+        margin: 0 auto;
+    }
+    .container-fluid .row {
+        margin-top: 300px;
+    }
+    .image-svg {
+        opacity: .3;
+        position: absolute;
+        top: -5%;
+        left: 1%;
+        z-index: -1;
+        width: 400px;
+        height: 400px;
+    }
+    .mt-200 {
+        margin-top: 50px;
     }
 }
 
-@media(max-width: 360px){
-    .contenido__title{
+@media(max-width: 768px) {
+    .second__section {
+        padding-bottom: 20px;
+    }
+    .third__section {
+        height: 100vh;
+    }
+    .third__section .third__section__title {
+        margin-top: 50px;
+    }
+    .four__section-flex {
+        flex-wrap: wrap;
+    }
+    .container .btn__primary {
+        margin-bottom: 30px;
+    }
+    .image-svg {
+        top: -6%;
+        width: 300px;
+        height: 300px;
+    }
+    .container-fluid .row {
+        margin-top: 150px;
+    }
+    .four__section::after {
+        bottom: -0.4px;
+    }
+}
+
+@media(max-width: 360px) {
+    .contenido__title {
         padding-top: 100px;
     }
 }
