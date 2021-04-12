@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-  
+
 // create reusable transporter object using the default SMTP transport
 export const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -12,6 +12,10 @@ export const transporter = nodemailer.createTransport({
 
 });
 
-transporter.verify().then( () => {
-    console.log('Nodemailer funcionando correctamente')
-})
+transporter.verify()
+    .then(() => {
+        console.log('Nodemailer funcionando correctamente')
+    })
+    .catch(err => {
+        console.log('Ha ocurrido un error')
+    })
