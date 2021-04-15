@@ -23,31 +23,31 @@ router.get('/api/contacto', allContact)
 router.get('/api/contacto/:id_contact', getContact)
 
 //employees
-router.post('/api/employees', [], createEmployees)
-router.get('/api/employees', [], allEmployees)
-router.get('/api/employees/:id_employee', [], getEmployees)
-router.put('/api/employees/:id_employee', [], updateEmployees)
-router.delete('/api/employees/:id_employee', [], deleteEmployees)
+router.post('/api/employees', [notToken], createEmployees)
+router.get('/api/employees', [notToken], allEmployees)
+router.get('/api/employees/:id_employee', [notToken], getEmployees)
+router.put('/api/employees/:id_employee', [notToken], updateEmployees)
+router.delete('/api/employees/:id_employee', [notToken], deleteEmployees)
 
 //appointment
-router.post('/api/appointment', [], createAppointment)
-router.get('/api/appointment', [], allAppointment)
-router.get('/api/appointment/:id_appointment', [], getAppointment)
-router.put('/api/appointment/:id_appointment', [], updateAppointment)
-router.delete('/api/appointment/:id_appointment', [], deleteAppointment)
+router.post('/api/appointment', [notToken], createAppointment)
+router.get('/api/appointment', [notToken], allAppointment)
+router.get('/api/appointment/:id_appointment', [notToken], getAppointment)
+router.put('/api/appointment/:id_appointment', [notToken], updateAppointment)
+router.delete('/api/appointment/:id_appointment', [notToken], deleteAppointment)
 
 //estate
-router.post('/api/estate', [], createEstate)
-router.get('/api/estate', [], allEstate)
-router.get('/api/estate/:id_estate', [], getEstate)
-router.put('/api/estate/:id_estate', [], updateEstate)
-router.delete('/api/estate/:id_estate', [], deleteEstate)
+router.post('/api/estate', [notToken], createEstate)
+router.get('/api/estate', [notToken], allEstate)
+router.get('/api/estate/:id_estate', [notToken], getEstate)
+router.put('/api/estate/:id_estate', [notToken], updateEstate)
+router.delete('/api/estate/:id_estate', [notToken], deleteEstate)
 
 //animal
-router.post('/api/animal', [], createAnimal)
-router.get('/api/animal', [], allAnimal)
-router.get('/api/animal/:id_animal', [], getAnimal)
-router.put('/api/animal/:id_animal', [], updateAnimal)
-router.delete('/api/animal/:id_animal', [], deleteAnimal)
+router.post('/api/animal', [notToken], createAnimal)
+router.get('/api/animal', [notToken], allAnimal)
+router.get('/api/animal/:id_animal', [notToken], getAnimal)
+router.put('/api/animal/:id_animal', [notToken], updateAnimal)
+router.delete('/api/animal/:id_animal', [notToken], deleteAnimal)
 
 export default router;

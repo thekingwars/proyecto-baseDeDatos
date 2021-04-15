@@ -1,29 +1,29 @@
 <div class="fixed" style="position: fixed; z-index: 9999; transition: ease-in all 1s;" #navbar>
-    <nav class="grid__two grid__two--bg__ligth" >
+    <nav class="grid__two grid__two--bg__ligth">
         <div class="grid__one__flex--1">
-           <img class="thumbnail" width="50%" src="../../../assets/img/Logo.png" alt="Logo liveSys">
+            <img class="thumbnail" width="50%" src="../../../assets/img/Logo.png" alt="Logo liveSys">
         </div>
         <div class="grid__one__flex--2 bg__succes">
             <div class="grid__one__links">
-                <a href="#inicio" class="border__a a__navbar">Inicio</a>
-                <a href="#segunda" class="border__a a__navbar">Segunda</a>
-                <a href="#tercera" class="border__a a__navbar">Tercera</a>
-                <a href="#cuarta" class="border__a a__navbar">Cuarta</a>
-                <a href="" class=" btn btn__primary" style="margin-left: 20px; margin-top: -5px;">Botones</a>
+                <a href="#inicio" class="border__a a__navbar" (click)="loader.hideSpinner()">Inicio</a>
+                <a href="#segunda" class="border__a a__navbar" (click)="loader.hideSpinner()">Segunda</a>
+                <a href="#tercera" class="border__a a__navbar" (click)="loader.hideSpinner()">Tercera</a>
+                <a routerLink="/login" class="border__a a__navbar">Login</a>
+                <a routerLink="/register" class=" btn btn__primary" style="margin-left: 20px; margin-top: -5px;">Registro</a>
             </div>
         </div>
-    
+
         <div class="burguer" (click)="onClick()">
-           <button class="btn" #button_active>
+            <button class="btn" #button_active>
                 <i class="fas fa-bars"></i>
            </button>
         </div>
     </nav>
-    
+
 </div>
 <main class="grid__row--two" style="margin-top: 100px;" #contenedor>
     <div class="flex__responsive">
-        <div class="contenedor__link"(click)="removeClass()">
+        <div class="contenedor__link" (click)="removeClass()">
             <a routerLink="" class="nav-link a__navbar">Inicio</a>
         </div>
         <div class="contenedor__link" (click)="removeClass()">
@@ -40,4 +40,3 @@
         </div>
     </div>
 </main>
-

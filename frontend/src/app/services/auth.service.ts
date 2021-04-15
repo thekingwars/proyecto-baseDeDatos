@@ -24,6 +24,10 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
+  logOut(){
+    return localStorage.removeItem('token')
+  }
+
 
   registerUser(user: usersModel){
     return this.http.post(`${this.api}/register`, user).pipe(

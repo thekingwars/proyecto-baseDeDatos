@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Crear animal</h1>
+            <hr>
+        </div>
+
+        <div class="col-md-12 pt-5">
+            <form [formGroup]="animalForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="nombre" class="form-control" placeholder="Soraya" formControlName="name">
+                            <label for="nombre">Nombre del Animal</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="cod" class="form-control" placeholder="000-000-000" formControlName="cod_animal">
+                            <label for="cod">Codigo del Animal</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pt-5">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="breed" class="form-control" placeholder="Mezquina" formControlName="breed">
+                            <label for="breed">Raza del animal</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pt-5">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="color" class="form-control" placeholder="rojo" formControlName="color">
+                            <label for="color">Color del Animal</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pt-5">
+                        <label for="fk_estate">Finca del Animal</label>
+                        <select id="fk_estate" class="form-select">
+                            <option [selected]>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 pt-5">
+                        <label for="fecha">Fecha de nacimiento del Animal</label>
+                        <input type="date" id="fecha" class="form-control" formControlName="fecha">
+                    </div>
+
+                    <div class="col-md-12 pt-5">
+                        <div class="text-center">
+                            <button class="btn btn-outline-success">
+                                Crear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

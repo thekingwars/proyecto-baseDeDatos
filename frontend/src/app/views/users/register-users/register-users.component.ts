@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { SocialAuthService } from 'angularx-social-login';
 import { GoogleLoginProvider } from "angularx-social-login";
@@ -19,7 +20,7 @@ export class RegisterUsersComponent implements OnInit {
   loggedIn: boolean
   loginGoogle
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private googleService: SocialAuthService) {
+  constructor(private fb: FormBuilder, private auth: AuthService, private googleService: SocialAuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -44,6 +45,7 @@ export class RegisterUsersComponent implements OnInit {
 
       this.auth.registerUserGoogle(idToken).subscribe(res => {
         console.log(res)
+        this.router.navigateByUrl('/admin/home')
       }, err => {
         swal.fire('Ha ocurrido un error', err['error']['err'], 'error')
       })
@@ -84,6 +86,7 @@ export class RegisterUsersComponent implements OnInit {
   onSubmit(){
     this.auth.registerUser(this.formRegister.value).subscribe(res => {
       swal.fire('Se ha registrado con éxito', '', 'success')
+      this.router.navigateByUrl('/admin/home')
     }, err => {
       swal.fire('Ha ocurrido un error', err['error']['err'], 'error')
     })

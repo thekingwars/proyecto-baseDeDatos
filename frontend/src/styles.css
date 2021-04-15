@@ -1,21 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
-:root{
+:root {
     --nav-width: 92px;
-      
     /*===== Colores =====*/
     --color__success: #7fbf41;
     --color__primary: #1a1c26;
-     --color__warning: #efad1b;
+    --color__warning: #efad1b;
     --color__ligth: #e7f2f7;
     --color__danger: #dc3545;
-        
     /*===== Fuente y tipografia =====*/
     --body-font: 'Poppins', sans-serif;
     --normal-font-size: 1rem;
     --small-font-size: .875rem;
     --card-font: 'Kumbh Sans', sans-serif;
-        
+    /*===== Colores =====*/
+    --first-color: #0C5DF4;
+    --bg-color: #12192C;
+    --sub-color: #B6CEFC;
+    --white-color: #FFF;
     /*===== z index =====*/
     --z-fixed: 100;
 }
@@ -31,7 +33,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.btn__primary{
+.btn__primary {
     border: 1px solid var(--color__primary);
     background-color: var(--color__primary);
     color: white;
@@ -41,6 +43,6 @@ body {
     padding-right: 20px;
 }
 
-.btn__primary:hover{
+.btn__primary:hover {
     color: white;
 }

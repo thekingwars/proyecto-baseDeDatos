@@ -1,0 +1,53 @@
+<div class="container-fluid" *ngIf="!this.error">
+    <header>Tablas</header>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>id estudiante</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="idEst">1</td>
+                <td data-label="NombreEst">Carlos</td>
+                <td data-label="ApellidoEst">Guerra</td>
+                <td data-label="EdadEst">20</td>
+            </tr>
+            <tr>
+                <td data-label="idEst">2</td>
+                <td data-label="NombreEst">Italo</td>
+                <td data-label="ApellidoEst">Solar</td>
+                <td data-label="EdadEst">21</td>
+            </tr>
+            <tr>
+                <td data-label="idEst">3</td>
+                <td data-label="NombreEst">Grace</td>
+                <td data-label="ApellidoEst">a</td>
+                <td data-label="EdadEst">20</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="full-h-w">
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;" *ngIf="this.error">
+        <div class="card-header text-center">
+            Error
+            <p>
+                <i class="fas fa-exclamation-circle"></i>
+            </p>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-center">{{this.error}}</p>
+
+            <div class="text-center">
+                <button class="btn btn-success" routerLink="/admin/animales/crearAnimal">
+                    ¿Deseas crear un animal?
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

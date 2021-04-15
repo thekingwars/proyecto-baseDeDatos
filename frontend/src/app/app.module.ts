@@ -15,6 +15,18 @@ import { ResetPasswordComponent } from './views/users/reset-password/reset-passw
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OnePageComponent } from './views/users/one-page/one-page.component';
+import { HomeComponent } from './views/admin/home/home.component';
+import { AdminComponent } from './views/admin/admin/admin.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AnimalesComponent } from './views/admin/animales/animales.component';
+import { CargosComponent } from './views/admin/cargos/cargos.component';
+import { EmpleadosComponent } from './views/admin/empleados/empleados.component';
+import { FincasComponent } from './views/admin/fincas/fincas.component';
+import { ModalsComponent } from './components/modals/modals.component';
+import { CreateAnimalsComponent } from './views/admin/animales/create-animals/create-animals.component';
+import { CrearCargoComponent } from './views/admin/cargos/crear-cargo/crear-cargo.component';
+import { VerCargoComponent } from './views/admin/cargos/ver-cargo/ver-cargo.component';
+import { EditarCargoComponent } from './views/admin/cargos/editar-cargo/editar-cargo.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +37,19 @@ import { OnePageComponent } from './views/users/one-page/one-page.component';
     ResetPasswordComponent,
     LoaderComponent,
     NavbarComponent,
-    OnePageComponent
+    OnePageComponent,
+    HomeComponent,
+    AdminComponent,
+    SidebarComponent,
+    AnimalesComponent,
+    CargosComponent,
+    EmpleadosComponent,
+    FincasComponent,
+    ModalsComponent,
+    CreateAnimalsComponent,
+    CrearCargoComponent,
+    VerCargoComponent,
+    EditarCargoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
 import { fromEvent } from 'rxjs';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent implements AfterViewInit {
   scroll: any;
   elemento;
 
-  constructor(private renderer2: Renderer2) { 
+  constructor(private renderer2: Renderer2, public loader: LoaderService) { 
   }
 
   ngAfterViewInit(){
@@ -57,5 +58,4 @@ export class NavbarComponent implements AfterViewInit {
       this.renderer2.removeClass(this.contenedor.nativeElement, 'animate__slideInLeft')
     }
   }
-
 }

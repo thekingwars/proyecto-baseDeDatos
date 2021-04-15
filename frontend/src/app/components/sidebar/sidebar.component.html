@@ -1,0 +1,48 @@
+<div class="body" #body_pd>
+    <div class="l-navbar" #navbar>
+        <nav class="sub_nav">
+            <div class="bg"></div>
+        </nav>
+        <nav class="nav">
+            <div>
+                <div class="nav__brand" (click)="this.showMenu()">
+                    <i class="fas fa-bars nav__toggle" #nav_toggle></i>
+                </div>
+                <div class="nav__list">
+                    <a routerLink="/admin/home" (click)="this.hideMenu()" routerLinkActive="active" class="nav__link">
+                        <i class="fas fa-home nav__icon"></i>
+                        <span class="nav__name">inicio</span>
+                    </a>
+                    <a routerLink="/admin/animales" (click)="this.hideMenu()" routerLinkActive="active" class="nav__link">
+                        <i class="fas fa-paw nav__icon"></i>
+                        <span class="nav__name">Animales</span>
+                    </a>
+
+                    <a routerLink="/admin/cargos" class="nav__link" (click)="this.hideMenu()">
+                        <i class="fas fa-user-md nav__icon"></i>
+                        <span class="nav__name">Cargos</span>
+                    </a>
+                    <a routerLink="/admin/empleados" class="nav__link" (click)="this.hideMenu()">
+                        <i class="fas fa-users nav__icon"></i>
+                        <span class="nav__name">Empleados</span>
+                    </a>
+                    <a routerLink="/admin/fincas" class="nav__link" (click)="this.hideMenu()">
+                        <i class="fas fa-tractor nav__icon"></i>
+                        <span class="nav__name">Fincas</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="#" class="nav__link" (click)="this.authService.logOut()">
+                <i class="fas fa-sign-out-alt nav__icon"></i>
+                <span class="nav__name">Salir</span>
+            </a>
+        </nav>
+    </div>
+
+    <div style="margin-top: 60px;">
+        <router-outlet>
+            <app-loader></app-loader>
+        </router-outlet>
+    </div>
+</div>
