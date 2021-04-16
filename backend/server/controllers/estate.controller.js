@@ -50,7 +50,7 @@ export const getEstate = (req, res) => {
             if (results.length === 0) {
                 return res.status(401).json({ ok: 'false', err: 'No existen datos aun de estados' })
             } else {
-                return res.status(200).json({ ok: true, employee: results[0] })
+                return res.status(200).json({ ok: true, estate: results[0] })
             }
         }
     })
