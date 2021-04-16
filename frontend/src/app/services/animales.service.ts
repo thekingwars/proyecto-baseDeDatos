@@ -25,4 +25,16 @@ export class AnimalesService {
   getAllAnimals(){
     return this.http.get(`${this.api}/animal`, {headers: this.headers})
   }
+
+  getAnimal(id){
+    return this.http.get(`${this.api}/animal/${id}`, {headers: this.headers})
+  }
+
+  editAnimal(animal: animalModel, id){
+    return this.http.put(`${this.api}/animal/${id}`, animal, {headers: this.headers})
+  }
+
+  deleteAnimal(id){
+    return this.http.delete(`${this.api}/animal/${id}`, {headers: this.headers})
+  }
 }

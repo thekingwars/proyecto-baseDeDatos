@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { cargoModel } from 'src/app/models/cargo.model';
 import { CargosService } from 'src/app/services/cargos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cargos',
@@ -9,17 +12,24 @@ import { CargosService } from 'src/app/services/cargos.service';
 export class CargosComponent implements OnInit {
 
   error;
-  cargos;
+  cargos: cargoModel[] = [];
 
-  constructor(private cargosServices: CargosService) { }
+  constructor(private cargosServices: CargosService, private router: Router) { }
 
   ngOnInit(): void {
     this.getCargos()
   }
 
+  verCargo(id){
+    this.router.navigate(['/admin/cargos/verCargo', id])
+  }
+
+  editarCargo(id){
+    this.router.navigate(['/admin/cargos/editarCargo', id])
+  }
+
   getCargos(){
     this.cargosServices.getAllCargos().subscribe(res => {
-      console.log(res)
       this.cargos = res['results']
     }, err => {
       this.error = err['error']['err']
@@ -27,4 +37,19 @@ export class CargosComponent implements OnInit {
     })
   }
 
+  deleteCargo( cargo: cargoModel, i: number ) {
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: `Está seguro que desea borrar a ${ cargo.name }`,
+      showConfirmButton: true,
+      showCancelButton: true
+    }).then( resp => {
+      console.log(resp)
+      if ( resp.value ) {
+        this.cargos.splice(i, 1);
+        console.log(this.cargos)
+        this.cargosServices.deleteCargo( cargo.id_appointment ).subscribe();
+      }
+    });
+  }
 }

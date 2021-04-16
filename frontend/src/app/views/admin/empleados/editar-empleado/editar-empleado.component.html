@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Crear Empleado</h1>
+            <hr>
+        </div>
+
+        <div class="col-md-12 pt-5">
+            <form [formGroup]="empleadoForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="name" class="form-control" placeholder="Soraya" formControlName="name">
+                            <label for="name">Nombre del empleado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="lastname" class="form-control" placeholder="Salazar" formControlName="lastname">
+                            <label for="lastname">Apellido del empleado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="dni" class="form-control" placeholder="29955765" formControlName="dni">
+                            <label for="dni">DNI del Empleado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" id="typeofpayroll" class="form-control" placeholder="Mensual" formControlName="typeofpayroll">
+                            <label for="typeofpayroll">Tipo de Nómina del empleado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="tel" id="phone" class="form-control" placeholder="+584147118022" formControlName="phone">
+                            <label for="phone">Teléfono del Empleado</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fecha">Fecha del Empleado</label>
+                        <input type="date" id="fecha" class="form-control" formControlName="fecha">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fk_appointment">Cargo del Empleado</label>
+                        <select id="fk_appointment" class="form-select" formControlName="fk_appointment">
+                            <option value="" selected>...</option>
+                            <option [value]="cargo.id_appointment" *ngFor="let cargo of cargos">
+                                {{cargo.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 pt-5">
+                        <div class="text-center">
+                            <button class="btn btn-outline-success">
+                                Crear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

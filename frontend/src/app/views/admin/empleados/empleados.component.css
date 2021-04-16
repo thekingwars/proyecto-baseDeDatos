@@ -33,3 +33,11 @@ table th {
     font-family: 18px;
     letter-spacing: 1px;
 }
+
+.full-h-w {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

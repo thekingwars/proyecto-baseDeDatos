@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Ver Finca</h1>
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Nombre de la Finca</label>
+                <input type="text" class="form-control" [value]="this.finca['name']" disabled>
+            </div>
+            <div class="col-md-6">
+                <label>Ciudad de la Finca</label>
+                <input type="text" class="form-control" [value]="this.finca['city']" disabled>
+            </div>
+            <div class="col-md-6 pt-5">
+                <label>Estado de la Finca</label>
+                <input type="text" class="form-control" [value]="this.finca['state']" disabled>
+            </div>
+            <div class="col-md-6 pt-5">
+                <label>Codigo de la finca</label>
+                <input type="text" class="form-control" [value]="this.finca['nro_country']" disabled>
+            </div>
+            <div class="col-md-6 pt-5">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Areas de la Finca" disabled [value]="this.finca['areas']" formControlName="areas" aria-label="Username" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="basic-addon1">M<sup>2</sup></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

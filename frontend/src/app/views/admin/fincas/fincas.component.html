@@ -1,33 +1,66 @@
-<div class="container">
-    <header>Tablas</header>
+<div class="container-fluid" *ngIf="this.fincas.length > 0">
+    <header>
+        Tablas
+
+        <div style="text-align: right;" routerLink="/admin/fincas/crearFinca">
+            <button class="btn btn-warning">
+                Crear Finca
+            </button>
+        </div>
+    </header>
+    <br>
     <table border="1">
         <thead>
             <tr>
-                <th>id estudiante</th>
+                <th>ID</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Edad</th>
+                <th>Ciudad</th>
+                <th>Estado</th>
+                <th>Numero de la finca</th>
+                <th>Areas de la finca</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td data-label="idEst">1</td>
-                <td data-label="NombreEst">Carlos</td>
-                <td data-label="ApellidoEst">Guerra</td>
-                <td data-label="EdadEst">20</td>
-            </tr>
-            <tr>
-                <td data-label="idEst">2</td>
-                <td data-label="NombreEst">Italo</td>
-                <td data-label="ApellidoEst">Solar</td>
-                <td data-label="EdadEst">21</td>
-            </tr>
-            <tr>
-                <td data-label="idEst">3</td>
-                <td data-label="NombreEst">Grace</td>
-                <td data-label="ApellidoEst">a</td>
-                <td data-label="EdadEst">20</td>
+            <tr *ngFor="let finca of fincas">
+                <td data-label="idEst">{{finca.id_estate}}</td>
+                <td data-label="idEst">{{finca.name}}</td>
+                <td data-label="NombreEst">{{finca.city}}</td>
+                <td data-label="ApellidoEst">{{finca.state}}</td>
+                <td data-label="EdadEst">{{finca.nro_country}}</td>
+                <td data-label="EdadEst">{{finca.areas}} M <sup>2</sup></td>
+                <td>
+                    <button type="button" class="btn btn-primary me-2" (click)="verFinca(finca.id_estate)">
+                        Ver
+                    </button>
+                    <button class="btn btn-success me-2" (click)="editarFinca(finca.id_estate)">
+                        Edit
+                    </button>
+                    <button class="btn btn-danger" (click)="deleteFinca(finca, i)">
+                        Delete
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="full-h-w" *ngIf="fincas.length === 0">
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card-header text-center">
+            Error
+            <p>
+                <i class="fas fa-exclamation-circle"></i>
+            </p>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-center">No existen Fincas creadas</p>
+
+            <div class="text-center">
+                <button class="btn btn-success" routerLink="/admin/fincas/crearFinca">
+                    ¿Deseas crear una finca?
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

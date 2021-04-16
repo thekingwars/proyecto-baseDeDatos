@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Ver Empleado</h1>
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Nombre del Empleado</label>
+                <input type="text" class="form-control" [value]="this.empleado['name']" disabled>
+            </div>
+            <div class="col-md-6">
+                <label>Apellido del Empleado</label>
+                <input type="text" class="form-control" [value]="this.empleado['lastname']" disabled>
+            </div>
+            <div class="col-md-6 pt-5">
+                <label>Dni del Empleado</label>
+                <input type="text" class="form-control" [value]="this.empleado['dni']" disabled>
+            </div>
+            <div class="col-md-6 pt-5">
+                <label>Fecha de nacimiento del Empleado</label>
+                <input type="text" class="form-control" [value]="this.empleado['fecha']" disabled>
+            </div>
+            <div class="col-md-6 pt-5">
+                <label>telefono del Empleado</label>
+                <input type="text" class="form-control" [value]="this.empleado['phone']" disabled>
+            </div>
+            <div class="col-md-6 pt-5">
+                <label>tipo de nomina del Empleado</label>
+                <input type="text" class="form-control" [value]="this.empleado['typeofpayroll']" disabled>
+            </div>
+            <div class="col-md-6 pt-5">
+                <label>cargo del Empleado</label>
+                <input type="text" class="form-control" [value]="this.empleado['fk_appointment']" disabled>
+            </div>
+        </div>
+    </div>
+</div>

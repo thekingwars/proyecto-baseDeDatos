@@ -27,6 +27,14 @@ import { CreateAnimalsComponent } from './views/admin/animales/create-animals/cr
 import { CrearCargoComponent } from './views/admin/cargos/crear-cargo/crear-cargo.component';
 import { VerCargoComponent } from './views/admin/cargos/ver-cargo/ver-cargo.component';
 import { EditarCargoComponent } from './views/admin/cargos/editar-cargo/editar-cargo.component';
+import { CrearEmpleadoComponent } from './views/admin/empleados/crear-empleado/crear-empleado.component';
+import { VerEmpleadoComponent } from './views/admin/empleados/ver-empleado/ver-empleado.component';
+import { EditarEmpleadoComponent } from './views/admin/empleados/editar-empleado/editar-empleado.component';
+import { CrearFincaComponent } from './views/admin/fincas/crear-finca/crear-finca.component';
+import { VerFincaComponent } from './views/admin/fincas/ver-finca/ver-finca.component';
+import { EditarFincaComponent } from './views/admin/fincas/editar-finca/editar-finca.component';
+import { VerAnimalComponent } from './views/admin/animales/ver-animal/ver-animal.component';
+import { EditarAnimalComponent } from './views/admin/animales/editar-animal/editar-animal.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +57,15 @@ import { EditarCargoComponent } from './views/admin/cargos/editar-cargo/editar-c
     CreateAnimalsComponent,
     CrearCargoComponent,
     VerCargoComponent,
-    EditarCargoComponent
+    EditarCargoComponent,
+    CrearEmpleadoComponent,
+    VerEmpleadoComponent,
+    EditarEmpleadoComponent,
+    CrearFincaComponent,
+    VerFincaComponent,
+    EditarFincaComponent,
+    VerAnimalComponent,
+    EditarAnimalComponent
   ],
   imports: [
     BrowserModule,

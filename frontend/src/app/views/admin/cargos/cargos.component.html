@@ -1,5 +1,14 @@
-<div class="container" *ngIf="!this.error">
-    <header>Tablas</header>
+<div class="container" *ngIf="cargos.length > 0">
+    <header>
+        Tablas
+
+        <div style="text-align: right;" routerLink="/admin/cargos/crearCargo">
+            <button class="btn btn-warning">
+                Crear Cargo
+            </button>
+        </div>
+    </header>
+    <br>
     <table border="1">
         <thead>
             <tr>
@@ -8,17 +17,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let cargo of cargos">
+            <tr *ngFor="let cargo of cargos; let i = index">
                 <td data-label="idEst" class="text-center">{{cargo.id_appointment}}</td>
                 <td data-label="NombreEst" class="text-center">{{cargo.name}}</td>
                 <td data-label="opciones">
-                    <button type="button" class="btn btn-primary me-2">
+                    <button type="button" class="btn btn-primary me-2" (click)="verCargo(cargo.id_appointment)">
                         Ver
                     </button>
-                    <button class="btn btn-success me-2">
+                    <button class="btn btn-success me-2" (click)="editarCargo(cargo.id_appointment)">
                         Edit
                     </button>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" (click)="deleteCargo(cargo, i)">
                         Delete
                     </button>
                 </td>
@@ -27,8 +36,8 @@
     </table>
 </div>
 
-<div class="full-h-w">
-    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;" *ngIf="this.error">
+<div class="full-h-w" *ngIf="cargos.length === 0">
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
         <div class="card-header text-center">
             Error
             <p>
@@ -36,7 +45,7 @@
             </p>
         </div>
         <div class="card-body">
-            <p class="card-text text-center">{{this.error}}</p>
+            <p class="card-text text-center">No existen Cargos creados</p>
 
             <div class="text-center">
                 <button class="btn btn-success" routerLink="/admin/cargos/crearCargo">

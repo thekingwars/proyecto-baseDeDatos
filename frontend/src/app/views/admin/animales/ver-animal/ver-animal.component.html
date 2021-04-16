@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Ver Animal</h1>
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="name">Nombre del animal</label>
+                <input type="text" id="name" class="form-control" [value]="this.animal.name" disabled>
+            </div>
+            <div class="col-md-6">
+                <label for="cod_animal">Codigo del animal</label>
+                <input type="text" id="cod_animal" class="form-control" [value]="this.animal.cod_animal" disabled>
+            </div>
+            <div class="col-md-6 pt-3">
+                <label for="breed">Raza del animal</label>
+                <input type="text" id="breed" class="form-control" [value]="this.animal.breed" disabled>
+            </div>
+            <div class="col-md-6 pt-3">
+                <label for="color">Color del animal</label>
+                <input type="text" id="color" class="form-control" [value]="this.animal.color" disabled>
+            </div>
+            <div class="col-md-6 pt-3">
+                <label for="fecha">Fecha de nacimiento del animal</label>
+                <input type="text" id="fecha" class="form-control" [value]="this.animal.fecha | date" disabled>
+            </div>
+            <div class="col-md-6 pt-3">
+                <label for="finca">Finca del Animal</label>
+                <input type="text" id="finca" class="form-control" [value]="this.animal.fk_estate" disabled>
+            </div>
+        </div>
+    </div>
+</div>

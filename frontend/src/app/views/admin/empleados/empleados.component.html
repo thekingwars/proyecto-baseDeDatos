@@ -1,33 +1,70 @@
-<div class="container-fluid">
-    <header>Tablas</header>
+<div class="container-fluid" *ngIf="this.empleados.length > 0">
+    <header>
+        Tablas
+
+        <div style="text-align: right;" routerLink="/admin/empleados/crearEmpleado">
+            <button class="btn btn-warning">
+                Crear Empleado
+            </button>
+        </div>
+    </header>
+    <br>
     <table border="1">
         <thead>
             <tr>
-                <th>id estudiante</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
-                <th>Edad</th>
+                <th>DNI</th>
+                <th>Tipo de Nomina</th>
+                <th>Telefono</th>
+                <th>Fecha</th>
+                <th>Cargo</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td data-label="idEst">1</td>
-                <td data-label="NombreEst">Carlos</td>
-                <td data-label="ApellidoEst">Guerra</td>
-                <td data-label="EdadEst">20</td>
-            </tr>
-            <tr>
-                <td data-label="idEst">2</td>
-                <td data-label="NombreEst">Italo</td>
-                <td data-label="ApellidoEst">Solar</td>
-                <td data-label="EdadEst">21</td>
-            </tr>
-            <tr>
-                <td data-label="idEst">3</td>
-                <td data-label="NombreEst">Grace</td>
-                <td data-label="ApellidoEst">a</td>
-                <td data-label="EdadEst">20</td>
+            <tr *ngFor="let empleado of empleados">
+                <td data-label="idEst">{{empleado.id_employee}}</td>
+                <td data-label="NombreEst">{{empleado.name}}</td>
+                <td data-label="ApellidoEst">{{empleado.lastname}}</td>
+                <td data-label="EdadEst">{{empleado.dni}}</td>
+                <td data-label="idEst">{{empleado.typeofpayroll}}</td>
+                <td data-label="NombreEst">{{empleado.phone}}</td>
+                <td data-label="ApellidoEst">{{empleado.fecha | date}}</td>
+                <td data-label="EdadEst">{{empleado.fk_appointment}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary me-2" (click)="verEmpleado(empleado.id_employee)">
+                        Ver
+                    </button>
+                    <button class="btn btn-success me-2" (click)="editarEmpleado(empleado.id_employee)">
+                        Edit
+                    </button>
+                    <button class="btn btn-danger" (click)="deleteEmpleado(empleado, i)">
+                        Delete
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="full-h-w" *ngIf="empleados.length === 0">
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card-header text-center">
+            Error
+            <p>
+                <i class="fas fa-exclamation-circle"></i>
+            </p>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-center">No existen Empleados creados</p>
+
+            <div class="text-center">
+                <button class="btn btn-success" routerLink="/admin/empleados/crearEmpleado">
+                    ¿Deseas crear un cargo?
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

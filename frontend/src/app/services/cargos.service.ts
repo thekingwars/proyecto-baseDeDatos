@@ -25,4 +25,17 @@ export class CargosService {
   getAllCargos(){
       return this.http.get(`${this.api}/appointment`, {headers: this.headers})
   }
+
+  getCargo(id){
+    return this.http.get(`${this.api}/appointment/${id}`, {headers: this.headers})
+  }
+
+  editarCargo(data: cargoModel, id){
+    return this.http.put(`${this.api}/appointment/${id}`, data, {headers: this.headers})
+  }
+
+  deleteCargo(id){
+    return this.http.delete(`${this.api}/appointment/${id}`, {headers: this.headers})
+  }
+  
 }

@@ -1,39 +1,54 @@
-<div class="container-fluid" *ngIf="!this.error">
-    <header>Tablas</header>
+<div class="container-fluid" *ngIf="this.animales.length > 0">
+    <header>
+        Tablas
+
+        <div style="text-align: right;" routerLink="/admin/animales/crearAnimal">
+            <button class="btn btn-warning">
+                Crear Animal
+            </button>
+        </div>
+    </header>
+    <br>
     <table border="1">
         <thead>
             <tr>
-                <th>id estudiante</th>
+                <th>ID</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Edad</th>
+                <th>Codigo del animal</th>
+                <th>Raza</th>
+                <th>Color</th>
+                <th>Fecha</th>
+                <th>Finca del animal</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td data-label="idEst">1</td>
-                <td data-label="NombreEst">Carlos</td>
-                <td data-label="ApellidoEst">Guerra</td>
-                <td data-label="EdadEst">20</td>
-            </tr>
-            <tr>
-                <td data-label="idEst">2</td>
-                <td data-label="NombreEst">Italo</td>
-                <td data-label="ApellidoEst">Solar</td>
-                <td data-label="EdadEst">21</td>
-            </tr>
-            <tr>
-                <td data-label="idEst">3</td>
-                <td data-label="NombreEst">Grace</td>
-                <td data-label="ApellidoEst">a</td>
-                <td data-label="EdadEst">20</td>
+            <tr *ngFor="let animal of animales">
+                <td data-label="idEst">{{animal.id_animal}}</td>
+                <td data-label="idEst">{{animal.name}}</td>
+                <td data-label="NombreEst">{{animal.cod_animal}}</td>
+                <td data-label="ApellidoEst">{{animal.breed}}</td>
+                <td data-label="EdadEst">{{animal.color}}</td>
+                <td data-label="ApellidoEst">{{animal.fecha | date}}</td>
+                <td data-label="EdadEst">{{animal.fk_estate}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary me-2" (click)="verAnimal(animal.id_animal)">
+                        Ver
+                    </button>
+                    <button class="btn btn-success me-2" (click)="editarAnimal(animal.id_animal)">
+                        Edit
+                    </button>
+                    <button class="btn btn-danger" (click)="deleteAnimal(animal, i)">
+                        Delete
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<div class="full-h-w">
-    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;" *ngIf="this.error">
+<div class="full-h-w" *ngIf="this.animales.length === 0">
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
         <div class="card-header text-center">
             Error
             <p>
