@@ -28,6 +28,8 @@ export const createAnimal = (req, res) => {
 export const allAnimal = (req, res) => {
     let sql = 'SELECT * FROM animal'
 
+    console.log(req.decode.id)
+
     database.query(sql, (err, results) => {
         if (err) {
             return res.status(500).json({ ok: 'false', err: 'Ha ocurrido un error: ' + err })

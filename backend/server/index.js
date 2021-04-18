@@ -16,10 +16,7 @@ app.set('port', 3000 || process.env.PORT)
 app.use(morgan('dev'))
 app.use(cors())
 app.use(bodyParser.json())
-app.use(express.urlencoded({extended: false}))
-
-//statics file
-app.use(express.static(path.join(__dirname, './public')))
+app.use(express.urlencoded({ extended: false }))
 
 //routers
 app.use(routes)
