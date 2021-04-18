@@ -2,14 +2,15 @@
     <header>
         Tablas
 
-        <div style="text-align: right;" routerLink="/admin/empleados/crearEmpleado">
-            <button class="btn btn-warning">
+        <div style="text-align: right;">
+            <button class="btn btn-warning" routerLink="/admin/empleados/crearEmpleado">
                 Crear Empleado
             </button>
+            <button (click)="exportexcel()" style="margin-left: 10px;" class="btn btn-success">Exportar a Excel</button>
         </div>
     </header>
     <br>
-    <table border="1">
+    <table border="1" id="excel-table">
         <thead>
             <tr>
                 <th>ID</th>

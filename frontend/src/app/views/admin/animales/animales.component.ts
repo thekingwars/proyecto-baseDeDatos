@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { animalModel } from 'src/app/models/animal.model';
 import { AnimalesService } from 'src/app/services/animales.service';
 import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-animales',
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 export class AnimalesComponent implements OnInit {
 
   animales: animalModel[] = []
+  fileName= 'animalesExport.xlsx';
 
   constructor(private animaleServices: AnimalesService, private router: Router) { }
 
@@ -48,6 +50,21 @@ export class AnimalesComponent implements OnInit {
     }, err => {
       console.log(err['error']['err'])
     })
+  }
+
+  exportexcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { empleadoModel } from 'src/app/models/empleados.model';
 import { EmpleadosService } from 'src/app/services/empleados.service';
 import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-empleados',
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 export class EmpleadosComponent implements OnInit {
 
   empleados: empleadoModel[] = []
+  fileName: string = 'empleadosExcel.xlsx'
 
   constructor(private empleadosServices: EmpleadosService, private router: Router) { }
 
@@ -49,5 +51,21 @@ export class EmpleadosComponent implements OnInit {
         this.empleadosServices.deleteEmpleado(empleado.id_employee).subscribe()
       }
     });
+  }
+
+  
+  exportexcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 }

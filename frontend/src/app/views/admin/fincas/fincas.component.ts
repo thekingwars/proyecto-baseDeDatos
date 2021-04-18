@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { fincaModel } from 'src/app/models/fincas.model';
 import { FincasService } from 'src/app/services/fincas.service';
 import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-fincas',
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 export class FincasComponent implements OnInit {
 
   fincas: fincaModel[] = []
+  fileName: string = 'fincasExcel.xlsx'
 
   constructor(private fincasServices: FincasService, private router: Router) { }
 
@@ -48,6 +50,21 @@ export class FincasComponent implements OnInit {
        this.fincasServices.deleteFinca(finca.id_estate).subscribe()
       }
     });
+  }
+
+  exportexcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 
 }
