@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `employees`
 
 CREATE TABLE IF NOT EXISTS `estate`
 (
-    `id_estate`    BIGINT     NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `id_estate`   BIGINT     NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name`        VARCHAR(50) NOT NULL CHECK (`name` <> ''),
     `city`        VARCHAR(25) NOT NULL CHECK (`city` <> ''),
     `state`       VARCHAR(25) NOT NULL CHECK (`state` <> ''),
@@ -77,3 +77,10 @@ CREATE TABLE IF NOT EXISTS `animal`
     FOREIGN KEY (`fk_estate`) REFERENCES `estate` (`id_estate`)
     ON DELETE CASCADE
 );
+
+SELECT 
+a1 * as 'animal',
+b1.name as 'estate' 
+FROM animal a1 
+JOIN estate b1 
+ON a1.fk_estate = b1.id_estate
