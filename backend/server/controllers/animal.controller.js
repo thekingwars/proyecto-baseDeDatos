@@ -26,8 +26,9 @@ export const createAnimal = (req, res) => {
 }
 
 export const allAnimal = (req, res) => {
-    let sql = `SELECT *, a1.create_at as "create_at", a1.update_at as "update_at", b1.name as "name_estate" 
-               FROM animal a1 JOIN estate b1 ON a1.fk_estate = b1.id_estate`
+    let sql = `SELECT a1.*, b1.name "name_estate"
+               FROM animal a1 JOIN estate b1 ON a1.fk_estate = b1.id_estate
+               ORDER BY id_animal`
 
     database.query(sql, (err, results) => {
         if (err) {
@@ -43,7 +44,7 @@ export const allAnimal = (req, res) => {
 }
 
 export const getAnimal = (req, res) => {
-    let sql = `SELECT *, a1.create_at as "create_at", a1.update_at as "update_at", b1.name as "name_estate" 
+    let sql = `SELECT a1.*, b1.name "name_estate" 
                FROM animal a1 JOIN estate b1 ON a1.fk_estate = b1.id_estate 
                WHERE a1.id_animal = ?`
 
