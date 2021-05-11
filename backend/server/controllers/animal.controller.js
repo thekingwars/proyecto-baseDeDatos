@@ -51,7 +51,20 @@ export const findAnimal = (req, res) => {
 export const createAnimal = async(req, res) => {
     const { name, fecha, cod_animal, breed, color, fk_estate } = req.body
     let sql = 'INSERT INTO animal SET ?'
-    let result = []
+    const result = []
+    const files = req.files.img_animal
+
+    //Primera forma de hacerlo, en mi opinion más limpia y entendible
+    if (files) {
+        for (const file of files) {
+            const { path } = file
+            const newPath = await pathCloudinary(path)
+
+            result.push({ newPath })
+
+            await fs.unlink(path)
+        }
+    }
 
     let data = {
         name,
@@ -60,26 +73,25 @@ export const createAnimal = async(req, res) => {
         breed,
         color,
         fk_estate,
-        img_animal: result
+        img_animal: JSON.stringify(result)
     }
 
-    const path = req.files.img_animal.map(result => {
-        return result.path
-    })
+    //Segunda forma de hacerlo (primero mapeo la info pa obtener solo el path, lo itero y le mando cada elemento a cloudinary y lo almaceno en un objeto pa bd)
 
-    for (let index = 0; index < path.length; index++) {
-        const element = path[index];
+    /*     const path = files.map(res => {
+            return res.path
+        })
 
-        let secure_url = await pathCloudinary(element)
+        for (let index = 0; index < path.length; index++) {
+            const element = path[index];
+            const newPath = await pathCloudinary(element)
+            result.push({ newPath })
 
-        result.push({ secure_url })
+            await fs.unlink(element)
+        } */
 
-        await fs.unlink(element)
-
-        console.log(result)
-    }
-
-
+    console.log(result)
+    console.log(data.img_animal)
 
     if (!name || !fecha || !cod_animal || !breed || !color || !fk_estate) {
         return res.status(400).json({ ok: false, err: 'Campos requeridos' });
