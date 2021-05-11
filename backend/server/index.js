@@ -18,6 +18,9 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }))
 
+//rutas estaticas
+app.use(express.static(path.join(__dirname, 'public')))
+
 //routers
 app.use(routes)
 

@@ -65,22 +65,16 @@ CREATE TABLE IF NOT EXISTS `estate`
 
 CREATE TABLE IF NOT EXISTS `animal`
 (
-    `id_animal`    BIGINT      NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `id_animal`  BIGINT       NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name`       VARCHAR(50)  NOT NULL CHECK (`name` <> ''),
     `fecha`      DATE         NOT NULL,
     `cod_animal` VARCHAR(200) NOT NULL CHECK (`cod_animal` <> ''),
     `breed`      VARCHAR(40)  NOT NULL CHECK (`breed` <> ''),
     `color`      VARCHAR(15)  NOT NULL CHECK (`color` <> ''),
+    `img_animal` JSON,
     `create_at`  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `update_at`  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `fk_estate` BIGINT NOT NULL,
     FOREIGN KEY (`fk_estate`) REFERENCES `estate` (`id_estate`)
     ON DELETE CASCADE
 );
-
-SELECT 
-a1 * as 'animal',
-b1.name as 'estate' 
-FROM animal a1 
-JOIN estate b1 
-ON a1.fk_estate = b1.id_estate
